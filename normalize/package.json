@@ -1,0 +1,25 @@
+{
+  "name": "normalize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "PatharaNor",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow-models/universal-sentence-encoder": "^1.1.1",
+    "@tensorflow/tfjs": "^1.2.6",
+    "@tensorflow/tfjs-node": "^1.2.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "minimongo": "^6.5.0",
+    "moment": "^2.24.0",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1"
+  }
+}

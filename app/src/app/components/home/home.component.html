@@ -1,0 +1,34 @@
+<!-- <mat-card>
+  <mat-card-header>
+    <mat-card-title>Hello!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px">
+      <div fxFlex>
+        <p>
+          I'm Hong Jing, you can call me Jingles. A data scientist with four years of machine learning industry experience in the area of natural language processing and recommendation systems. Working on a range of classification and optimisation problems. Ability to deliver innovative solutions accurately and efficiently solve challenging business problems. Nimble and agile professional to deliver solutions in a rapidly changing environment. Curious and inquisitive with a constant desire to learn and pioneer new uses for machine learning. [<a href="http://jinglescode.github.io" target="_blank">Read More</a>]
+        </p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card> -->
+
+<div
+  fxLayout="row wrap"
+  fxLayout.lt-sm="column"
+  fxLayoutAlign="flex-start">
+  <div *ngFor="let showcase of showcases" fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="100%">
+    <div style="padding:10px;">
+      <a href="{{showcase.link}}">
+        <mat-card style="height:250px">
+          <mat-card-header>
+            <mat-card-title>{{showcase.name}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{showcase.description}}
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+</div>

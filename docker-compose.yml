@@ -1,0 +1,103 @@
+version: '3.4'
+services:
+
+  db-stock-recorder:
+    image: postgres
+    container_name: db-stock-recorder
+    environment: 
+      POSTGRES_USER: 'norstock'
+      POSTGRES_PASSWORD: 'Skfct@_En2'
+      POSTGRES_DB: stock
+    ports: 
+      - 5432:5432
+    command:
+      - postgres
+      - -c
+      - max_connections=200
+      - -c
+      - shared_buffers=100MB
+    volumes: 
+      - ./database/pginit:/docker-entrypoint-initdb.d/
+      - ./pgdata:/var/lib/postgresql/data
+    restart: always
+
+  stock-sequelize:
+    container_name: stock-sequelize
+    build: 
+      context: ./sequelize
+      dockerfile: Dockerfile
+    ports: 
+      - 3002:3002
+    expose: 
+      - 3002
+    depends_on:
+      - db-stock-recorder
+    links:
+      - db-stock-recorder
+    entrypoint: 
+      - sh
+      - docker-entrypoint.sh
+    volumes: 
+      - ./sequelize:/app/sequelize
+      - /app/sequelize/node_modules
+    restart: always
+
+  stock-normalize-data:
+    container_name: stock-normalize-data
+    build: 
+      context: ./normalize
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
+    expose: 
+      - 3000
+    entrypoint: 
+      - sh
+      - docker-entrypoint.sh
+    volumes: 
+      - ./normalize:/app/normalize
+      - /app/normalize/node_modules
+    restart: always
+
+  stock-fetcher-data:
+    container_name: stock-fetcher-data
+    build: 
+      context: ./fetcher
+      dockerfile: Dockerfile
+    ports: 
+      - 3001:3001
+    expose: 
+      - 3001
+    entrypoint: 
+      - sh
+      - docker-entrypoint.sh
+    volumes: 
+      - ./fetcher:/app/fetcher
+      - /app/fetcher/node_modules
+    restart: always
+
+  web-stock-forecasting:
+    container_name: web-stock-forecasting
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    ports: 
+      - 4200:4200
+    expose: 
+      - 4200
+    entrypoint: 
+      - sh
+      - docker-entrypoint.sh
+    volumes: 
+      - ./app:/app/web-stock-forecasting
+      - /app/web-stock-forecasting/node_modules
+    restart: always
+
+volumes: 
+  pgdata:
+    external: true
+
+networks: 
+  default:
+    external: 
+      name: stock-forecasting
