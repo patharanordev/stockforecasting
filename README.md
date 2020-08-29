@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Coming soon...
+The objective of this project, I would like to learn and prove my hypothesis in ML. I applied [jinglescode](https://jinglescode.github.io/demos/tfjs-timeseries-stocks)'s source code that is **model training on web application** to my project, thank you for the simple practise.
+
+**Workflow/Diagram of my service**
 
 ![stockforecasting flow](./assets/stockforecasting-flow.png)
 
@@ -28,6 +30,7 @@ Stock forecasting service contains 5 micro-services, including :
 **Frontend**
 
  - Model training on web application (TensorFlow.js)
+   (Ref. original content https://jinglescode.github.io/demos/tfjs-timeseries-stocks)
 
 ## Before start
 
@@ -249,6 +252,10 @@ $ curl --location --request POST 'http://localhost:3002/stock/btc_usd_cexio' \
 	} 
 }'
 ```
+
+## Load/Save model feature
+
+I provided load/save **model training** file. You can use it via UI of the web application.
 
 ## Contributing
 
